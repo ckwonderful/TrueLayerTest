@@ -1,0 +1,9 @@
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\obj\Debug\netcoreapp3.1\TrueLayer.Service.csproj.AssemblyReference.cache
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\obj\Debug\netcoreapp3.1\TrueLayer.Service.AssemblyInfoInputs.cache
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\obj\Debug\netcoreapp3.1\TrueLayer.Service.AssemblyInfo.cs
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\obj\Debug\netcoreapp3.1\TrueLayer.Service.csproj.CoreCompileInputs.cache
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\bin\Debug\netcoreapp3.1\TrueLayer.Service.deps.json
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\bin\Debug\netcoreapp3.1\TrueLayer.Service.dll
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\bin\Debug\netcoreapp3.1\TrueLayer.Service.pdb
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\obj\Debug\netcoreapp3.1\TrueLayer.Service.dll
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service\obj\Debug\netcoreapp3.1\TrueLayer.Service.pdb

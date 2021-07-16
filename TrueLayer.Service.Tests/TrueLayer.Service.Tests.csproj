@@ -11,4 +11,9 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TrueLayer.Model\TrueLayer.Model.csproj" />
+    <ProjectReference Include="..\TrueLayer.Service\TrueLayer.Service.csproj" />
+  </ItemGroup>
+
 </Project>

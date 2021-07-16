@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using TrueLayer.Model;
 
 namespace TrueLayer.Service.Tests
 {
@@ -11,7 +13,7 @@ namespace TrueLayer.Service.Tests
     public class PokemonServiceShould
     {
         [Test]
-        public void ReturnBasicPokemonInformationForAValidName()
+        public async Task ReturnBasicPokemonInformationForAValidName()
         {
             var pokemonSpecies = new PokemonSpecies
             {
@@ -24,7 +26,7 @@ namespace TrueLayer.Service.Tests
 
             var httpService = new Mock<IHttpService>();
             httpService.Setup(x => x.Get<PokemonSpecies>("mewtwo"))
-                .Returns(pokemonSpecies);
+                .ReturnsAsync(pokemonSpecies);
 
             var expectedResult = new Pokemon
             {
@@ -35,18 +37,11 @@ namespace TrueLayer.Service.Tests
             };
             var sut = new PokemonService(httpService.Object);
 
-            sut.GetPokemonBasicDetails("mewtwo").Should().BeEquivalentTo(expectedResult);
+           (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
         }
     }
 
-    public class Pokemon
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Habitat { get; set; }
-        public bool IsLegendary { get; set; }
-    }
-
+    
     public class PokemonService : IPokemonService
     {
         private readonly IHttpService _httpService;
@@ -56,45 +51,22 @@ namespace TrueLayer.Service.Tests
             _httpService = httpService;
         }
 
-        public Pokemon GetPokemonBasicDetails(string mewtwo)
+        public async Task<Pokemon> GetPokemonBasicDetails(string mewtwo)
         {
-            var pokemonSpeciesDetails = _httpService.Get<PokemonSpecies>(mewtwo);
+            var pokemonSpeciesDetails = await _httpService.Get<PokemonSpecies>(mewtwo);
             return new Pokemon
             {
                 Name = pokemonSpeciesDetails.name,
-                Description = pokemonSpeciesDetails.flavor_text_entries.FirstOrDefault(x => x.language == "en").flavor_text,
+                Description = pokemonSpeciesDetails.flavor_text_entries.FirstOrDefault(x => x.language == "en")?.flavor_text,
                 Habitat = pokemonSpeciesDetails.habitat.name,
                 IsLegendary = pokemonSpeciesDetails.is_legendary
             };
         }
     }
-
-    public class PokemonSpecies
-    {
-        public string name;
-        public List<FlavorText> flavor_text_entries;
-        public Habitat habitat;
-        public bool is_legendary;
-    }
-
-    public class Habitat
-    {
-        public string name;
-    }
-
-    public class FlavorText
-    {
-        public string language;
-        public string flavor_text;
-    }
-
-    public interface IHttpService
-    {
-        T Get<T>(string mewtwo);
-    }
+    
 
     public interface IPokemonService
     {
-        Pokemon GetPokemonBasicDetails(string mewtwo);
+        Task<Pokemon> GetPokemonBasicDetails(string mewtwo);
     }
 }

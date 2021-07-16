@@ -11,7 +11,9 @@
           "FluentAssertions": "5.10.3",
           "Moq": "4.16.1",
           "NUnit": "3.13.2",
-          "NUnit3TestAdapter": "4.0.0"
+          "NUnit3TestAdapter": "4.0.0",
+          "TrueLayer.Model": "1.0.0",
+          "TrueLayer.Service": "1.0.0"
         },
         "runtime": {
           "TrueLayer.Service.Tests.dll": {}
@@ -450,6 +452,16 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "TrueLayer.Model/1.0.0": {
+        "runtime": {
+          "TrueLayer.Model.dll": {}
+        }
+      },
+      "TrueLayer.Service/1.0.0": {
+        "runtime": {
+          "TrueLayer.Service.dll": {}
+        }
       }
     }
   },
@@ -794,6 +806,16 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "TrueLayer.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TrueLayer.Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

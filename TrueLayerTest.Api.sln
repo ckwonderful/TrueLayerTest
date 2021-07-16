@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayerTest.Api", "TrueLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayer.Service.Tests", "TrueLayer.Service.Tests\TrueLayer.Service.Tests.csproj", "{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayer.Model", "TrueLayer.Model\TrueLayer.Model.csproj", "{5AE4593E-9C95-4604-B814-4F9DC085F232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayer.Service", "TrueLayer.Service\TrueLayer.Service.csproj", "{7C30F03C-DF04-44C7-8A86-C8E43A87BE00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AE4593E-9C95-4604-B814-4F9DC085F232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AE4593E-9C95-4604-B814-4F9DC085F232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AE4593E-9C95-4604-B814-4F9DC085F232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AE4593E-9C95-4604-B814-4F9DC085F232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C30F03C-DF04-44C7-8A86-C8E43A87BE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C30F03C-DF04-44C7-8A86-C8E43A87BE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C30F03C-DF04-44C7-8A86-C8E43A87BE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C30F03C-DF04-44C7-8A86-C8E43A87BE00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

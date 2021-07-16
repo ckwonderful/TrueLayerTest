@@ -706,6 +706,26 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "TrueLayer.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/TrueLayer.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrueLayer.Model.dll": {}
+        }
+      },
+      "TrueLayer.Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/TrueLayer.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TrueLayer.Service.dll": {}
+        }
       }
     }
   },
@@ -3286,6 +3306,16 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "TrueLayer.Model/1.0.0": {
+      "type": "project",
+      "path": "../TrueLayer.Model/TrueLayer.Model.csproj",
+      "msbuildProject": "../TrueLayer.Model/TrueLayer.Model.csproj"
+    },
+    "TrueLayer.Service/1.0.0": {
+      "type": "project",
+      "path": "../TrueLayer.Service/TrueLayer.Service.csproj",
+      "msbuildProject": "../TrueLayer.Service/TrueLayer.Service.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3293,7 +3323,9 @@
       "FluentAssertions >= 5.10.3",
       "Moq >= 4.16.1",
       "NUnit >= 3.13.2",
-      "NUnit3TestAdapter >= 4.0.0"
+      "NUnit3TestAdapter >= 4.0.0",
+      "TrueLayer.Model >= 1.0.0",
+      "TrueLayer.Service >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3322,7 +3354,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\kelly\\source\\repos\\TrueLayerTest.Api\\TrueLayer.Model\\TrueLayer.Model.csproj": {
+              "projectPath": "C:\\Users\\kelly\\source\\repos\\TrueLayerTest.Api\\TrueLayer.Model\\TrueLayer.Model.csproj"
+            },
+            "C:\\Users\\kelly\\source\\repos\\TrueLayerTest.Api\\TrueLayer.Service\\TrueLayer.Service.csproj": {
+              "projectPath": "C:\\Users\\kelly\\source\\repos\\TrueLayerTest.Api\\TrueLayer.Service\\TrueLayer.Service.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

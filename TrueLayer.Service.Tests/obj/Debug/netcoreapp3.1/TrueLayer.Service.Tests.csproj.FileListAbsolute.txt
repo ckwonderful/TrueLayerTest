@@ -13,3 +13,8 @@ C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\obj\Debug\
 C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\obj\Debug\netcoreapp3.1\TrueLayer.Service.Tests.csproj.CoreCompileInputs.cache
 C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\obj\Debug\netcoreapp3.1\TrueLayer.Service.Tests.dll
 C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\obj\Debug\netcoreapp3.1\TrueLayer.Service.Tests.pdb
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\bin\Debug\netcoreapp3.1\TrueLayer.Model.dll
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\bin\Debug\netcoreapp3.1\TrueLayer.Service.dll
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\bin\Debug\netcoreapp3.1\TrueLayer.Model.pdb
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\bin\Debug\netcoreapp3.1\TrueLayer.Service.pdb
+C:\Users\kelly\source\repos\TrueLayerTest.Api\TrueLayer.Service.Tests\obj\Debug\netcoreapp3.1\TrueLayer.Service.Tests.csproj.CopyComplete
