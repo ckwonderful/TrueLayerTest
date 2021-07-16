@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayerTest.Api", "TrueLayerTest.Api\TrueLayerTest.Api.csproj", "{41F9592B-9BF4-45F2-9752-5F75C2B49D76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLayer.Service.Tests", "TrueLayer.Service.Tests\TrueLayer.Service.Tests.csproj", "{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41F9592B-9BF4-45F2-9752-5F75C2B49D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41F9592B-9BF4-45F2-9752-5F75C2B49D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41F9592B-9BF4-45F2-9752-5F75C2B49D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41F9592B-9BF4-45F2-9752-5F75C2B49D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE47D0F6-1426-4C09-809B-BFA1EE973FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABD7F19B-4B77-4291-8351-E6E250A9980A}
+	EndGlobalSection
+EndGlobal
