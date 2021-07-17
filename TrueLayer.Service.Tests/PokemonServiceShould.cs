@@ -21,11 +21,11 @@ namespace TrueLayer.Service.Tests
                 habitat = new Habitat { name = "home" },
                 is_legendary = true,
                 flavor_text_entries = new List<FlavorText>
-                    {new FlavorText {flavor_text = "flavor1", language = "en"}}
+                    {new FlavorText {flavor_text = "flavor1", language = new Language {name = "en" }}}
             };
 
             var httpService = new Mock<IHttpService>();
-            httpService.Setup(x => x.Get<PokemonSpecies>("mewtwo"))
+            httpService.Setup(x => x.Get<PokemonSpecies>("https://pokeapi.co/api/v2/pokemon-species/mewtwo"))
                 .ReturnsAsync(pokemonSpecies);
 
             var expectedResult = new Pokemon
@@ -42,31 +42,5 @@ namespace TrueLayer.Service.Tests
     }
 
     
-    public class PokemonService : IPokemonService
-    {
-        private readonly IHttpService _httpService;
-
-        public PokemonService(IHttpService httpService)
-        {
-            _httpService = httpService;
-        }
-
-        public async Task<Pokemon> GetPokemonBasicDetails(string mewtwo)
-        {
-            var pokemonSpeciesDetails = await _httpService.Get<PokemonSpecies>(mewtwo);
-            return new Pokemon
-            {
-                Name = pokemonSpeciesDetails.name,
-                Description = pokemonSpeciesDetails.flavor_text_entries.FirstOrDefault(x => x.language == "en")?.flavor_text,
-                Habitat = pokemonSpeciesDetails.habitat.name,
-                IsLegendary = pokemonSpeciesDetails.is_legendary
-            };
-        }
-    }
-    
-
-    public interface IPokemonService
-    {
-        Task<Pokemon> GetPokemonBasicDetails(string mewtwo);
-    }
+   
 }
