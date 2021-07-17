@@ -35,10 +35,9 @@ namespace TrueLayerTest.Api
             });
 
             services.AddHttpClient();
-
+            
             services.AddTransient<IPokemonService, PokemonService>();
-            services.AddTransient<IHttpService, HttpService>();
-
+          services.AddSingleton(typeof(IHttpService<>), typeof(IHttpService<>));
 
         }
 

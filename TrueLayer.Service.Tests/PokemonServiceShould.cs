@@ -24,8 +24,8 @@ namespace TrueLayer.Service.Tests
                     {new FlavorText {flavor_text = "flavor1", language = new Language {name = "en" }}}
             };
 
-            var httpService = new Mock<IHttpService>();
-            httpService.Setup(x => x.Get<PokemonSpecies>("https://pokeapi.co/api/v2/pokemon-species/mewtwo"))
+            var httpService = new Mock<IHttpService<PokemonSpecies>>();
+            httpService.Setup(x => x.Get("https://pokeapi.co/api/v2/pokemon-species/mewtwo"))
                 .ReturnsAsync(pokemonSpecies);
 
             var expectedResult = new Pokemon
