@@ -10,21 +10,26 @@ namespace TrueLayer.Service
     public class PokemonService : IPokemonService
     {
         private readonly IHttpService<PokemonSpecies> _httpService;
+        private readonly ITranslationServiceFactory _translationServiceFactory;
         private string _pokemonDetailsBaseUrl = "https://pokeapi.co/api/v2/pokemon-species";
 
-        public PokemonService(IHttpService<PokemonSpecies> httpService)
+        public PokemonService(IHttpService<PokemonSpecies> httpService, ITranslationServiceFactory translationServiceFactory)
         {
             _httpService = httpService;
+            _translationServiceFactory = translationServiceFactory;
         }
 
         public async Task<Pokemon> GetPokemonBasicDetails(string name)
         {
             var pokemonSpeciesDetails = await _httpService.Get($"{_pokemonDetailsBaseUrl}/{name}");
 
+            var description = pokemonSpeciesDetails.flavor_text_entries.FirstOrDefault(x => x.language.name == "en")
+                ?.flavor_text;
+
             return new Pokemon
             {
                 Name = pokemonSpeciesDetails.name,
-                Description = pokemonSpeciesDetails.flavor_text_entries.FirstOrDefault(x => x.language.name == "en")?.flavor_text,
+                Description = description,
                 Habitat = pokemonSpeciesDetails.habitat.name,
                 IsLegendary = pokemonSpeciesDetails.is_legendary
             };

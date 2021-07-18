@@ -1,16 +1,11 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.OpenApi.Models;
+using NetCore.AutoRegisterDi;
+using TrueLayer.Model;
 using TrueLayer.Service;
 
 namespace TrueLayerTest.Api
@@ -28,16 +23,18 @@ namespace TrueLayerTest.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("TrueLayer Pokemon Api", new OpenApiInfo { Title = "TrueLayer Pokemon Api", Version = "v1"});
-                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-            });
 
             services.AddHttpClient();
-            
+
             services.AddTransient<IPokemonService, PokemonService>();
-          services.AddSingleton(typeof(IHttpService<>), typeof(IHttpService<>));
+            services.AddTransient<ITranslationServiceFactory, TranslationServiceFactory>();
+            services.AddSingleton(typeof(IHttpService<string>), typeof(HttpService<string>));
+            services.AddSingleton(typeof(IHttpService<PokemonSpecies>), typeof(HttpService<PokemonSpecies>));
+
+            services.RegisterAssemblyPublicNonGenericClasses(
+                    Assembly.GetAssembly(typeof(ITranslationService)))
+                .Where(c => c.Name.EndsWith("TranslationService"))
+                .AsPublicImplementedInterfaces();
 
         }
 
@@ -48,13 +45,6 @@ namespace TrueLayerTest.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrueLayer Pokemon Api");
-            });
 
             app.UseRouting();
 

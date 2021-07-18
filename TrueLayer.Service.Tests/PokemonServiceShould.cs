@@ -27,6 +27,7 @@ namespace TrueLayer.Service.Tests
             var httpService = new Mock<IHttpService<PokemonSpecies>>();
             httpService.Setup(x => x.Get("https://pokeapi.co/api/v2/pokemon-species/mewtwo"))
                 .ReturnsAsync(pokemonSpecies);
+            var translateServiceFactory = new TranslationServiceFactory(new List<ITranslationService>());
 
             var expectedResult = new Pokemon
             {
@@ -35,7 +36,7 @@ namespace TrueLayer.Service.Tests
                 Habitat = pokemonSpecies.habitat.name,
                 IsLegendary = pokemonSpecies.is_legendary
             };
-            var sut = new PokemonService(httpService.Object);
+            var sut = new PokemonService(httpService.Object, translateServiceFactory);
 
            (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
         }

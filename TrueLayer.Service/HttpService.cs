@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Serialization;
 
 namespace TrueLayer.Service
 {
@@ -28,14 +27,19 @@ namespace TrueLayer.Service
         private async Task<TResponse> DeserializeObject(HttpResponseMessage response)
         {
             var responseAsString = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TResponse>(responseAsString);
+
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                MissingMemberHandling = MissingMemberHandling.Ignore
+            };
+
+            return JsonConvert.DeserializeObject<TResponse>(responseAsString, jsonSerializerSettings);
         }
 
         public async Task<TResponse> Post<TInput>(string url, TInput parameters)
         {
             var client = _httpClientFactory.CreateClient();
 
-           // var objAsJson = new JavaScriptSerializer().Serialize(parameters);
             var objAsJson = JsonConvert.SerializeObject(parameters);
             var content = new StringContent(objAsJson, Encoding.UTF8, "application/json");
             
