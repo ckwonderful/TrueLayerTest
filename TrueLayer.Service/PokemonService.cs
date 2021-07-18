@@ -19,7 +19,7 @@ namespace TrueLayer.Service
             _translationServiceFactory = translationServiceFactory;
         }
 
-        public async Task<Pokemon> GetPokemonBasicDetails(string name)
+        public async Task<Pokemon> GetPokemonDetails(string name, bool translate)
         {
             var pokemonSpeciesDetails = await _httpService.Get($"{_pokemonDetailsBaseUrl}/{name}");
 
@@ -27,21 +27,24 @@ namespace TrueLayer.Service
                 .FirstOrDefault(x => x.language.name == "en")
                 ?.flavor_text;
 
-            ITranslationService translationService;
-            if (pokemonSpeciesDetails.is_legendary || pokemonSpeciesDetails.habitat.name.Equals("cave"))
+            if (translate)
             {
-                translationService = _translationServiceFactory.Create("yoda");
-                
-            }
-            else
-            {
-                translationService = _translationServiceFactory.Create("shakespeare");
-            }
+                ITranslationService translationService;
+                if (pokemonSpeciesDetails.is_legendary || pokemonSpeciesDetails.habitat.name.Equals("cave"))
+                {
+                    translationService = _translationServiceFactory.Create("yoda");
 
-            description = await translationService.Translate(
-                pokemonSpeciesDetails.flavor_text_entries
-                    .FirstOrDefault(x => x.language.name == "en")?
-                    .flavor_text);
+                }
+                else
+                {
+                    translationService = _translationServiceFactory.Create("shakespeare");
+                }
+
+                description = await translationService.Translate(
+                    pokemonSpeciesDetails.flavor_text_entries
+                        .FirstOrDefault(x => x.language.name == "en")?
+                        .flavor_text);
+            }
 
             return new Pokemon
             {
@@ -56,6 +59,6 @@ namespace TrueLayer.Service
 
     public interface IPokemonService
     {
-        Task<Pokemon> GetPokemonBasicDetails(string name);
+        Task<Pokemon> GetPokemonDetails(string name, bool translate);
     }
 }

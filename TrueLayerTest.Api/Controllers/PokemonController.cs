@@ -26,7 +26,16 @@ namespace TrueLayerTest.Api.Controllers
         [Route("{name}")]
         public async Task<ActionResult<Pokemon>> Get(string name)
         {
-            var pokemon = await _pokemonService.GetPokemonBasicDetails(name);
+            var pokemon = await _pokemonService.GetPokemonDetails(name, false);
+
+            return Ok(pokemon);
+        }
+
+        [HttpGet]
+        [Route("translated/{name}")]
+        public async Task<ActionResult<Pokemon>> GetTranslated(string name)
+        {
+            var pokemon = await _pokemonService.GetPokemonDetails(name, true);
 
             return Ok(pokemon);
         }

@@ -13,6 +13,28 @@ namespace TrueLayer.Service.Tests
     public class PokemonServiceShould
     {
         [Test]
+        public async Task ReturnBasicPokemonInformationForAValidName()
+        {
+            var pokemonSpecies = PokemonSpecies(false, "anywhere");
+
+            var httpService = new Mock<IHttpService<PokemonSpecies>>();
+            httpService.Setup(x => x.Get("https://pokeapi.co/api/v2/pokemon-species/mewtwo"))
+                .ReturnsAsync(pokemonSpecies);
+            var translateServiceFactory = new TranslationServiceFactory(new List<ITranslationService>());
+
+            var expectedResult = new Pokemon
+            {
+                Name = pokemonSpecies.name,
+                Description = pokemonSpecies.flavor_text_entries.First().flavor_text,
+                Habitat = pokemonSpecies.habitat.name,
+                IsLegendary = pokemonSpecies.is_legendary
+            };
+            var sut = new PokemonService(httpService.Object, translateServiceFactory);
+
+           (await sut.GetPokemonDetails("mewtwo", false)).Should().BeEquivalentTo(expectedResult);
+        }
+
+        [Test]
         public async Task ReturnAYodaTranslationForIsLegendaryPokemon()
         {
             var pokemonSpecies = PokemonSpecies(true, "anywhere");
@@ -33,7 +55,7 @@ namespace TrueLayer.Service.Tests
             };
             var sut = new PokemonService(httpService.Object, translateServiceFactory.Object);
 
-            (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
+            (await sut.GetPokemonDetails("mewtwo", true)).Should().BeEquivalentTo(expectedResult);
         }
 
         [Test]
@@ -58,7 +80,7 @@ namespace TrueLayer.Service.Tests
             };
             var sut = new PokemonService(httpService.Object, translateServiceFactory.Object);
 
-            (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
+            (await sut.GetPokemonDetails("mewtwo", true)).Should().BeEquivalentTo(expectedResult);
         }
 
         [Test]
@@ -83,7 +105,7 @@ namespace TrueLayer.Service.Tests
             };
             var sut = new PokemonService(httpService.Object, translateServiceFactory.Object);
 
-            (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
+            (await sut.GetPokemonDetails("mewtwo", true)).Should().BeEquivalentTo(expectedResult);
         }
 
         private static Mock<ITranslationServiceFactory> AssumeYodaTranslationServiceReturns(Mock<IHttpService<TranslateResponse>> httpService)
