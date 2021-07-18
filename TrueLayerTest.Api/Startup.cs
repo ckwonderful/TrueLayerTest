@@ -28,7 +28,7 @@ namespace TrueLayerTest.Api
 
             services.AddTransient<IPokemonService, PokemonService>();
             services.AddTransient<ITranslationServiceFactory, TranslationServiceFactory>();
-            services.AddSingleton(typeof(IHttpService<string>), typeof(HttpService<string>));
+            services.AddSingleton(typeof(IHttpService<TranslateResponse>), typeof(HttpService<TranslateResponse>));
             services.AddSingleton(typeof(IHttpService<PokemonSpecies>), typeof(HttpService<PokemonSpecies>));
 
             services.RegisterAssemblyPublicNonGenericClasses(

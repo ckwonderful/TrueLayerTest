@@ -18,7 +18,7 @@ namespace TrueLayer.Service
             {
                 text = text
             });
-            return translate.text;
+            return translate?.contents?.translated;
         }
 
         public bool CanTranslate(string translationType)

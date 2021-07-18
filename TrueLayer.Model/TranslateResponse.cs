@@ -6,6 +6,13 @@ namespace TrueLayer.Model
 {
     public class TranslateResponse
     {
-        public string text { get; set; }
+        public Contents contents { get; set; }
+    }
+
+
+    public class Contents
+    {
+        public string translated { get; set; }
+
     }
 }

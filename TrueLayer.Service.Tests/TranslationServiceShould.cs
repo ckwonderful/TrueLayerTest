@@ -21,7 +21,7 @@ namespace TrueLayer.Service.Tests
             httpService.Setup(x => x.Post(
                     It.Is<string>(x => x == "https://api.funtranslations.com/translate/shakespeare"), 
                     It.Is<TranslateRequest>(y => y.text ==translateText)))
-                .ReturnsAsync(new TranslateResponse { text = translated});
+                .ReturnsAsync(new TranslateResponse { translated = translated});
             var sut = new ShakespeareTranslationService(httpService.Object);
             (await sut.Translate(translateText)).Should().Be(translated);
         }

@@ -63,7 +63,7 @@ namespace TrueLayer.Service.Tests
             shakespeareHttpService.Setup(x => x.Post(
                     "https://api.funtranslations.com/translate/shakespeare",
                     It.Is<TranslateRequest>(y => y.text == pokemonSpecies.flavor_text_entries.First().flavor_text)))
-                .ReturnsAsync(new TranslateResponse { text = translated});
+                .ReturnsAsync(new TranslateResponse { contents =  new Contents { translated = translated }});
 
             var translateServiceFactory = new Mock<ITranslationServiceFactory>();
             translateServiceFactory.Setup(x => x.Create("shakespeare"))
