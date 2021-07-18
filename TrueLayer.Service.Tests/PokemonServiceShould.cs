@@ -19,7 +19,7 @@ namespace TrueLayer.Service.Tests
             {
                 name = "mewtwo",
                 habitat = new Habitat { name = "home" },
-                is_legendary = true,
+                is_legendary = false,
                 flavor_text_entries = new List<FlavorText>
                     {new FlavorText {flavor_text = "flavor1", language = new Language {name = "en" }}}
             };
@@ -39,6 +39,36 @@ namespace TrueLayer.Service.Tests
             var sut = new PokemonService(httpService.Object, translateServiceFactory);
 
            (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
+        }
+
+        [Test]
+        public async Task ReturnAShakespeareTranslationForIsLegendaryPokemon()
+        {
+            var pokemonSpecies = new PokemonSpecies
+            {
+                name = "mewtwo",
+                habitat = new Habitat { name = "home" },
+                is_legendary = true,
+                flavor_text_entries = new List<FlavorText>
+                    {new FlavorText {flavor_text = "flavor1", language = new Language {name = "en" }}}
+            };
+
+            var httpService = new Mock<IHttpService<PokemonSpecies>>();
+            httpService.Setup(x => x.Get("https://pokeapi.co/api/v2/pokemon-species/mewtwo"))
+                .ReturnsAsync(pokemonSpecies);
+            var translateServiceFactory = new TranslationServiceFactory(new List<ITranslationService>());
+
+            var translated = "flavor1-shakespeare";
+            var expectedResult = new Pokemon
+            {
+                Name = pokemonSpecies.name,
+                Description = translated,
+                Habitat = pokemonSpecies.habitat.name,
+                IsLegendary = pokemonSpecies.is_legendary
+            };
+            var sut = new PokemonService(httpService.Object, translateServiceFactory);
+
+            (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
         }
     }
 
