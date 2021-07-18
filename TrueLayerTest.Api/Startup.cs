@@ -54,6 +54,7 @@ namespace TrueLayerTest.Api
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
