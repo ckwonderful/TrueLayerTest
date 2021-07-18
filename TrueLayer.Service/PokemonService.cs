@@ -26,6 +26,15 @@ namespace TrueLayer.Service
             var description = pokemonSpeciesDetails.flavor_text_entries.FirstOrDefault(x => x.language.name == "en")
                 ?.flavor_text;
 
+            if (pokemonSpeciesDetails.is_legendary)
+            {
+                var translationService = _translationServiceFactory.Create("shakespeare");
+                description = await translationService.Translate(
+                    pokemonSpeciesDetails.flavor_text_entries
+                        .FirstOrDefault(x => x.language.name == "en")?
+                        .flavor_text);
+            }
+
             return new Pokemon
             {
                 Name = pokemonSpeciesDetails.name,

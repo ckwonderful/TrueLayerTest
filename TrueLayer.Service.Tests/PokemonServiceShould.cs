@@ -52,13 +52,23 @@ namespace TrueLayer.Service.Tests
                 flavor_text_entries = new List<FlavorText>
                     {new FlavorText {flavor_text = "flavor1", language = new Language {name = "en" }}}
             };
+            var translated = "flavor1-shakespeare";
+
 
             var httpService = new Mock<IHttpService<PokemonSpecies>>();
             httpService.Setup(x => x.Get("https://pokeapi.co/api/v2/pokemon-species/mewtwo"))
                 .ReturnsAsync(pokemonSpecies);
-            var translateServiceFactory = new TranslationServiceFactory(new List<ITranslationService>());
 
-            var translated = "flavor1-shakespeare";
+            var shakespeareHttpService = new Mock<IHttpService<TranslateResponse>>();
+            shakespeareHttpService.Setup(x => x.Post(
+                    "https://api.funtranslations.com/translate/shakespeare",
+                    It.Is<TranslateRequest>(y => y.text == pokemonSpecies.flavor_text_entries.First().flavor_text)))
+                .ReturnsAsync(new TranslateResponse { text = translated});
+
+            var translateServiceFactory = new Mock<ITranslationServiceFactory>();
+            translateServiceFactory.Setup(x => x.Create("shakespeare"))
+                .Returns(new ShakespeareTranslationService(shakespeareHttpService.Object));
+
             var expectedResult = new Pokemon
             {
                 Name = pokemonSpecies.name,
@@ -66,7 +76,7 @@ namespace TrueLayer.Service.Tests
                 Habitat = pokemonSpecies.habitat.name,
                 IsLegendary = pokemonSpecies.is_legendary
             };
-            var sut = new PokemonService(httpService.Object, translateServiceFactory);
+            var sut = new PokemonService(httpService.Object, translateServiceFactory.Object);
 
             (await sut.GetPokemonBasicDetails("mewtwo")).Should().BeEquivalentTo(expectedResult);
         }
