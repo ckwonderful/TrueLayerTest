@@ -23,17 +23,25 @@ namespace TrueLayer.Service
         {
             var pokemonSpeciesDetails = await _httpService.Get($"{_pokemonDetailsBaseUrl}/{name}");
 
-            var description = pokemonSpeciesDetails.flavor_text_entries.FirstOrDefault(x => x.language.name == "en")
+            var description = pokemonSpeciesDetails.flavor_text_entries
+                .FirstOrDefault(x => x.language.name == "en")
                 ?.flavor_text;
 
-            if (pokemonSpeciesDetails.is_legendary)
+            ITranslationService translationService;
+            if (pokemonSpeciesDetails.is_legendary || pokemonSpeciesDetails.habitat.name.Equals("cave"))
             {
-                var translationService = _translationServiceFactory.Create("shakespeare");
-                description = await translationService.Translate(
-                    pokemonSpeciesDetails.flavor_text_entries
-                        .FirstOrDefault(x => x.language.name == "en")?
-                        .flavor_text);
+                translationService = _translationServiceFactory.Create("yoda");
+                
             }
+            else
+            {
+                translationService = _translationServiceFactory.Create("shakespeare");
+            }
+
+            description = await translationService.Translate(
+                pokemonSpeciesDetails.flavor_text_entries
+                    .FirstOrDefault(x => x.language.name == "en")?
+                    .flavor_text);
 
             return new Pokemon
             {
